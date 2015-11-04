@@ -1,0 +1,24 @@
+<%= form_tag requests_path, method: :get do %>
+  <%= text_field_tag :query, @query %>
+  <%= submit_tag "Search" %>
+<% end %>
+<h1>All Requests</h1>
+<% @requests.each do |request| %>
+  <div>
+    <%= link_to request.name, request_path(request) %>
+    <% if request.done %>
+      <%= form_for request do |f| %>
+        <%= f.hidden_field :done, value: false %>
+        <%= f.submit "Mark UnDone" %>
+      <% end %>
+    <% else %>
+      <%= form_for request do |f| %>
+        <%= f.hidden_field :done, value: true %>
+        <%= f.submit "Mark Done" %>
+      <% end %>
+    <% end %>
+    <%#= link_to "#{request.done}", request_path(request), method: :patch %>
+  </div>
+<% end %>
+
+<%= paginate @requests %>

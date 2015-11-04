@@ -1,0 +1,8 @@
+<h1><%= @request.name %></h1>
+<p>Email: <%= mail_to @request.email %></p>
+<p>Department: <%= @request.department %></p>
+<p>Message: <%= @request.message %></p>
+<hr>
+<%= link_to "Edit Request", edit_request_path(@request) %>
+<%= link_to "Delete", request_path(@request), method: :delete,
+              data: {confirm: "Are you sure?" } %>
